@@ -54,3 +54,8 @@ nav input, nav select, nav button {
     font-size: 18px;
     color: #2c3e50;
 }
+
+.property-card .info p {
+    margin: 5px 0;
+    color: #555;
+}
