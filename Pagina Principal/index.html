@@ -41,38 +41,34 @@
         <div class="row">
           <div class="col-md-12 mb-2">
             <div class="form-group">
-              <label for="Type">Keyword</label>
-              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="Type">Type</label>
-              <select class="form-control form-control-lg form-control-a" id="Type">
-                <option>All Type</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
+              <label for="Estado">Estado</label>
+              <select class="form-control form-control-lg form-control-a" id="Estado">
+                <option>Seleccione un estado</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="city">City</label>
-              <select class="form-control form-control-lg form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
+              <label for="TipoOperación">Tipo Operación</label>
+              <select class="form-control form-control-lg form-control-a" id="TipoOperación">
+                <option>Renta</option>
+                <option>Venta</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
+              <label for="Ciudad">Ciudad</label>
+              <select class="form-control form-control-lg form-control-a" id="Ciudad">
+                <option>Seleccione una ciudad</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="bedrooms">Habitaciones</label>
               <select class="form-control form-control-lg form-control-a" id="bedrooms">
-                <option>Any</option>
+                <option>Cualquier número</option>
                 <option>01</option>
                 <option>02</option>
                 <option>03</option>
@@ -81,21 +77,9 @@
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bathrooms">
-                <option>Any</option>
+              <label for="garages">Pisos</label>
+              <select class="form-control form-control-lg form-control-a" id="Pisos">
+                <option>Cualquier número</option>
                 <option>01</option>
                 <option>02</option>
                 <option>03</option>
@@ -104,13 +88,24 @@
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group">
-              <label for="price">Min Price</label>
-              <select class="form-control form-control-lg form-control-a" id="price">
-                <option>Unlimite</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$150,000</option>
-                <option>$200,000</option>
+              <label for="bathrooms">Baños</label>
+              <select class="form-control form-control-lg form-control-a" id="Baños">
+                <option>Cualquier número</option>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group">
+              <label for="price">Precio Minimo</label>
+              <select class="form-control form-control-lg form-control-a" id="Precio">
+                <option>Ilimitado</option>
+                <option>$500,000</option>
+                <option>$800,000</option>
+                <option>$1,000,000</option>
+                <option>$5,000,000</option>
               </select>
             </div>
           </div>
@@ -122,6 +117,7 @@
     </div>
   </div>
   <!--/ Form Search End /-->
+  
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
@@ -799,7 +795,7 @@
   <script src="lib/scrollreveal/scrollreveal.min.js"></script>
   <!-- Contact Form JavaScript File -->
   <script src="contactform/contactform.js"></script>
-
+  <script src="../Pagina Principal/js/buscarPropiedades.js"></script>
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
