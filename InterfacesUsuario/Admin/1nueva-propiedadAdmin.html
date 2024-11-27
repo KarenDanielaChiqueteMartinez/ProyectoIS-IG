@@ -1,422 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Agregar Nueva Propiedad">
-    <meta name="author" content="">
-    <title>Agregar Nueva Propiedad</title>
-    <!-- Custom fonts and styles -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800" rel="stylesheet">
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Propiedad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-<body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<body>
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Godoy House</div>
-            </a>
-
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePropiedades" aria-expanded="true" aria-controls="collapsePropiedades">
-                    <i class="fas fa-fw fa-building"></i>
-                    <span>Propiedades</span>
-                </a>
-                <div id="collapsePropiedades" class="collapse" aria-labelledby="headingPropiedades" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="lista-propiedades.html">Lista de Propiedades</a>
-                        <a class="collapse-item" href="nueva-propiedad.html">Nueva Propiedad</a>
-                        <a class="collapse-item" href="editar-propiedad.html">Editar Propiedad</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsesores" aria-expanded="true" aria-controls="collapseAsesores">
-                    <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Asesores</span>
-                </a>
-                <div id="collapseAsesores" class="collapse" aria-labelledby="headingAsesores" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="asignar-asesores.html">Asignar Asesores</a>
-                        <a class="collapse-item" href="editar-asesores.html">Editar Asesores</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCitas" aria-expanded="true" aria-controls="collapseCitas">
-                    <i class="fas fa-fw fa-calendar-alt"></i>
-                    <span>Citas</span>
-                </a>
-                <div id="collapseCitas" class="collapse" aria-labelledby="headingCitas" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="agendar-cita.html">Agendar Cita</a>
-                        <a class="collapse-item" href="editar-cita.html">Editar Cita</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuenta" aria-expanded="true" aria-controls="collapseCuenta">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Mi Cuenta</span>
-                </a>
-                <div id="collapseCuenta" class="collapse" aria-labelledby="headingCuenta" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="modificar-perfil.html">Modificar mi Perfil</a>
-                        <a class="collapse-item" href="cambiar-contrasena.html">Cambiar Contraseña</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="logout.html">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Salir</span></a>
-            </li>
-        </ul>
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <h1 class="h3 mb-0 text-gray-800">Agregar Nueva Propiedad</h1>
-                </nav>
-
-                <!-- Page Content -->
-                <div class="container-fluid">
-                    <form>
-                        <!-- Contenedor para ambos bloques -->
-                        <div class="d-flex flex-wrap flex-md-row-reverse">
-
-
-
-<!-- Bloque 1: Datos Generales -->
-<div class="card mb-4 flex-fill">
-    <div class="card-header">
-        <h5>Datos Generales</h5>
-    </div>
-    <div class="card-body">
+    <div class="form-container">
+        <h2>Agregar Nueva Propiedad</h2>
         <form id="addPropertyForm">
-            <!-- Título de la Publicación -->
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título de la Publicación</label>
-                <input type="text" id="titulo" class="form-control" placeholder="Ingrese el título de la propiedad" required>
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required>
             </div>
 
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Descripcion</label>
-                <input type="text" id="descripcion" class="form-control" placeholder="Ingrese una descripción" required>
+            <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <input type="text" id="tipo" name="tipo" required>
             </div>
-        
-            <!-- Tipo de Propiedad -->
-            <div class="mb-3">
-                <label for="tipoPropiedad" class="form-label">Tipo de Propiedad</label>
-                <select id="tipoPropiedad" class="form-select custom-select" required>
-                    <option value="" selected disabled>Seleccione un tipo de propiedad</option>
-                    <option value="casa">Casa</option>
-                    <option value="departamento">Departamento</option>
-                    <option value="hacienda">Hacienda</option>
-                    <option value="villa">Villa/TownHouse</option>
-                    <option value="edificio">Edificio</option>
-                    <option value="casaPlaya">Casa de playa</option>
-                    <option value="departamentoPlaya">Departamento de playa</option>
-                </select>
+
+            <div class="form-group">
+                <label for="operacion">Operación</label>
+                <input type="text" id="operacion" name="operacion" required>
             </div>
-        
-            <!-- Operación -->
-            <div class="mb-3">
-                <label for="operacion" class="form-label">Operación</label>
-                <select id="operacion" class="form-select custom-select" onchange="controlarPrecio()" required>
-                    <option value="" selected disabled>Seleccione el tipo de operación</option>
-                    <option value="venta">Venta</option>
-                    <option value="renta">Renta</option>
-                </select>
+
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" name="precio" required>
             </div>
-        
-            <!-- Precio -->
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="precioVenta" class="form-label">Precio de Venta</label>
-                    <input type="number" id="precioVenta" class="form-control" placeholder="Ingrese el precio de venta" disabled>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="precioRenta" class="form-label">Precio de Alquiler</label>
-                    <input type="number" id="precioRenta" class="form-control" placeholder="Ingrese el precio de alquiler" disabled>
-                </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input type="text" id="imagen" name="imagen">
             </div>
-        
-            <!-- Medidas -->
-            <div class="mb-3">
-                <label class="form-label">Medidas</label>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="areaConstruida" class="form-label">Área Construida (m²)</label>
-                        <input type="number" id="areaConstruida" class="form-control" placeholder="Ingrese el área construida" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="areaTotal" class="form-label">Área Total/Terreno (m²)</label>
-                        <input type="number" id="areaTotal" class="form-control" placeholder="Ingrese el área total" required>
-                    </div>
-                </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
             </div>
-        
-            <!-- Áreas de la Propiedad -->
-            <h6 class="mt-4">Áreas de la Propiedad</h6>
-            <div class="row">
-                <!-- Campos con contadores -->
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cuartos</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cuartos', -1)">-</button>
-                        <input type="number" id="Cuartos" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cuartos', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Baños</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Baños', -1)">-</button>
-                        <input type="number" id="Banos" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Baños', 1)">+</button>
-                    </div>
-                </div>
-                <!-- Campos adicionales como Pisos, Sala de Estar, Cocina -->
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Pisos</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Pisos', -1)">-</button>
-                        <input type="number" id="Pisos" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Pisos', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Sala de Estar</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('SalaEstar', -1)">-</button>
-                        <input type="number" id="SalaEstar" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('SalaEstar', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cocina</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Cocina" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cocina</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Cocina" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Estudio o Oficina</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="EstudioOficina" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Comedor</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Comedor" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cuarto Lavado</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="CuartoLavado" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cuarto Servicio</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="CuartoServicio" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Vesitibulo Recibidor</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="VesitibuloRecibidor" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Jardin</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Jardin" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Terraza</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Terraza" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Balcon</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Balcon" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Piscina</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Piscina" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Gimnasio</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="Gimnasio" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Spa O Sauna</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="SpaOSauna" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Roof Garden</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="RoofGarden" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Área Mascotas</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="AreaMascotas" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cancha Deportiva</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="canchaDeportiva" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Área Juegos</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="AreaJuegos" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">Cancha de Tenis</label>
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', -1)">-</button>
-                        <input type="number" id="CanchaTenis" class="form-control text-center" value="0" min="0">
-                        <button class="btn btn-outline-secondary" type="button" onclick="cambiarValor('Cocina', 1)">+</button>
-                    </div>
-                </div>
+
+            <div class="form-group">
+                <label for="fechaCreacion">Fecha de Creación</label>
+                <input type="date" id="fechaCreacion" name="fechaCreacion" required>
             </div>
-        
-    
-        
-            <!-- Ubicación Geográfica -->
-            <h6 class="mt-4">Ubicación Geográfica</h6>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label for="direccion" class="form-label">Dirección</label>
-                    <input type="text" id="direccion" class="form-control" placeholder="Ingrese la dirección completa" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="ciudad" class="form-label">Ciudad</label>
-                    <input type="text" id="ciudad" class="form-control" placeholder="Ingrese la ciudad" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="estado" class="form-label">Estado</label>
-                    <input type="text" id="estado" class="form-control" placeholder="Ingrese el estado" required>
-                </div>
+
+            <div class="form-group">
+                <label for="precioVenta">Precio Venta</label>
+                <input type="number" id="precioVenta" name="precioVenta">
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="pais" class="form-label">País</label>
-                    <input type="text" id="pais" class="form-control" placeholder="Ingrese el país" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="codigoPostal" class="form-label">Código Postal</label>
-                    <input type="text" id="codigoPostal" class="form-control" placeholder="Ingrese el código postal" required>
-                </div>
+
+            <div class="form-group">
+                <label for="precioRenta">Precio Renta</label>
+                <input type="number" id="precioRenta" name="precioRenta">
             </div>
-        
-            <!-- Mapa para seleccionar ubicación -->
-            <h6 class="mt-4">Seleccione la ubicación en el mapa</h6>
-            <div id="map" style="height: 400px; border: 1px solid #ddd;"></div>
-        
-            <!-- Campos ocultos para coordenadas -->
-            <input type="hidden" id="latitud" name="latitud">
-            <input type="hidden" id="longitud" name="longitud">
-        
-            <!-- Botones -->
-            <div class="text-right">
-                <button type="button" class="btn btn-secondary">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+
+            <div class="form-group">
+                <label for="areaConstruida">Área Construida (m²)</label>
+                <input type="number" id="areaConstruida" name="areaConstruida">
             </div>
+
+            <div class="form-group">
+                <label for="areaTotal">Área Total (m²)</label>
+                <input type="number" id="areaTotal" name="areaTotal">
+            </div>
+
+            <div class="form-group">
+                <label for="cuartos">Cuartos</label>
+                <input type="number" id="cuartos" name="cuartos">
+            </div>
+
+            <div class="form-group">
+                <label for="banos">Baños</label>
+                <input type="number" id="banos" name="banos">
+            </div>
+
+            <div class="form-group">
+                <label for="pisos">Pisos</label>
+                <input type="number" id="pisos" name="pisos">
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ciudad">Ciudad</label>
+                <input type="text" id="ciudad" name="ciudad" required>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pais">País</label>
+                <input type="text" id="pais" name="pais" required>
+            </div>
+
+            <div class="form-group">
+                <label for="codigoPostal">Código Postal</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="latitud">Latitud</label>
+                <input type="number" id="latitud" name="latitud">
+            </div>
+
+            <div class="form-group">
+                <label for="longitud">Longitud</label>
+                <input type="number" id="longitud" name="longitud">
+            </div>
+
+            <button type="submit">Agregar Propiedad</button>
         </form>
-        
-                </div>
-            </div>
-            <!-- End of Main Content -->
-        </div>
-        <!-- End of Content Wrapper -->
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="../../HTML/JS/propertiesDashboard.js"></script>
-    <script src="../js/formulario-propiedades.js"></script>
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script>
+        // Función para manejar el formulario
+        document.getElementById('addPropertyForm').addEventListener('submit', async function(event) {
+            event.preventDefault();  // Evitar que el formulario se envíe de forma tradicional
+
+            // Obtener los valores del formulario
+            const form = event.target;
+            const data = {
+                Titulo: form.titulo.value,
+                Tipo: form.tipo.value,
+                Operacion: form.operacion.value,
+                Precio: form.precio.value,
+                Imagen: form.imagen.value || 'default.jpg',  // Asignar valor por defecto
+                Descripcion: form.descripcion.value,
+                FechaCreacion: form.fechaCreacion.value,
+                PrecioVenta: form.precioVenta.value || null,
+                PrecioRenta: form.precioRenta.value || null,
+                AreaConstruida: form.areaConstruida.value || null,
+                AreaTotal: form.areaTotal.value || null,
+                Cuartos: form.cuartos.value || 0,
+                Banos: form.banos.value || 0,
+                Pisos: form.pisos.value || 0,
+                Direccion: form.direccion.value,
+                Ciudad: form.ciudad.value,
+                Estado: form.estado.value,
+                Pais: form.pais.value,
+                CodigoPostal: form.codigoPostal.value,
+                Latitud: form.latitud.value || null,
+                Longitud: form.longitud.value || null
+            };
+
+            // Enviar la solicitud a la API
+            try {
+                const response = await fetch('http://localhost:3000/api/propiedades', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);  // Muestra el mensaje de éxito
+                } else {
+                    alert('Error al agregar la propiedad: ' + result.error);  // Muestra el error si falla
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un error al intentar agregar la propiedad.');
+            }
+        });
+    </script>
+
 </body>
 </html>
