@@ -30,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-home"></i>
                 </div>
@@ -48,9 +48,9 @@
                 </a>
                 <div id="collapsePropiedades" class="collapse" aria-labelledby="headingPropiedades" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="index.html">Lista de Propiedades</a>
-                        <a class="collapse-item" href="nueva-propiedad.html">Nueva Propiedad</a>
-                        <a class="collapse-item" href="editar-propiedad.html">Editar Propiedad</a>
+                        <a class="collapse-item" href="1indexAdmin.html" target="_self">Lista de Propiedades</a>
+                        <a class="collapse-item" href="1nueva-propiedadAdmin.html" target="_self">Nueva Propiedad</a>
+                        <a class="collapse-item" href="1editar-propiedad.html" target="_self">Editar Propiedad</a>
                     </div>
                 </div>
             </li>
@@ -63,8 +63,8 @@
                 </a>
                 <div id="collapseAsesores" class="collapse" aria-labelledby="headingAsesores" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="asignar-asesores.html">Asignar Asesores</a>
-                        <a class="collapse-item" href="editar-asesores.html">Editar Asesores</a>
+                        <a class="collapse-item" href="1asignarAsesorAdmin.html" target="_self">Agregar Asesor</a>
+                        <a class="collapse-item" href="1editarAsesorAdmin.html"  target="_self">Editar Asesores</a>
                     </div>
                 </div>
             </li>
@@ -77,8 +77,8 @@
                 </a>
                 <div id="collapseCitas" class="collapse" aria-labelledby="headingCitas" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="agendar-cita.html">Agendar Cita</a>
-                        <a class="collapse-item" href="editar-cita.html">Editar Cita</a>
+                        <a class="collapse-item" href="1agendar-cita.html" target="_self">Agendar Cita</a>
+                        <a class="collapse-item" href="1editar-cita.html"  target="_self">Editar Cita</a>
                     </div>
                 </div>
             </li>
@@ -209,7 +209,7 @@
                                             <th>Editar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="propertiesTableBody">
                                         <!-- Aquí se insertarán las filas dinámicamente -->
                                     </tbody>
                                 </table>
@@ -235,7 +235,8 @@
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-    
+    <!-- Script para cargar propiedades -->
+    <script src="../../HTML/JS/propertiesDashboard.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
 

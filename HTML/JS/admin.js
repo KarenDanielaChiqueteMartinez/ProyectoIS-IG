@@ -1,7 +1,5 @@
 const API_URL = 'http://localhost:3000/api/propiedades';
 
-
-
 // Variables globales
 let propertyIdToDelete = null; // Para manejar eliminaciones con el modal
 
@@ -19,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarPropiedades();
 });
 
+// Función para cargar propiedades desde la API
 async function cargarPropiedades() {
     try {
         const response = await fetch(API_URL);
@@ -28,12 +27,11 @@ async function cargarPropiedades() {
         const propiedades = await response.json();
         mostrarPropiedades(propiedades);
     } catch (error) {
-        console.error('Error al cargar propiedades:', error); // Asegúrate de ver esto en la consola
+        console.error('Error al cargar propiedades:', error);
         const propertiesSection = document.getElementById('propertiesTable');
         propertiesSection.innerHTML = '<p>Ocurrió un error al cargar las propiedades.</p>';
     }
 }
-
 
 // Mostrar propiedades en formato de tabla
 function mostrarPropiedades(propiedades) {
@@ -48,8 +46,9 @@ function mostrarPropiedades(propiedades) {
                 <td>${prop.Id}</td>
                 <td>${prop.Titulo}</td>
                 <td>${prop.Tipo}</td>
-                <td>$${prop.Precio.toLocaleString()}</td>
-                <td>${prop.Ubicacion}</td>
+                <td>${prop.Operacion}</td>
+                <td>$${prop.PrecioVenta || prop.PrecioRenta || 'N/A'}</td>
+                <td>${prop.Ciudad}, ${prop.Estado}</td>
                 <td>
                     <button class="btn btn-warning btn-sm" onclick="editarPropiedad(${prop.Id})">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="eliminarPropiedad(${prop.Id})">Eliminar</button>
@@ -68,14 +67,19 @@ async function editarPropiedad(id) {
             throw new Error('Error al obtener los datos de la propiedad.');
         }
         const prop = await response.json();
-        // Llenar el formulario con los datos
+
+        // Llenar el formulario con los datos de la propiedad
         document.getElementById('propertyId').value = prop.Id;
         document.getElementById('title').value = prop.Titulo;
         document.getElementById('type').value = prop.Tipo;
-        document.getElementById('price').value = prop.Precio;
-        document.getElementById('location').value = prop.Ubicacion;
-        document.getElementById('image').value = prop.Imagen || '';
-        document.getElementById('description').value = prop.Descripcion || '';
+        document.getElementById('operation').value = prop.Operacion;
+        document.getElementById('priceSale').value = prop.PrecioVenta || '';
+        document.getElementById('priceRent').value = prop.PrecioRenta || '';
+        document.getElementById('city').value = prop.Ciudad;
+        document.getElementById('state').value = prop.Estado;
+        document.getElementById('latitude').value = prop.Latitud || '';
+        document.getElementById('longitude').value = prop.Longitud || '';
+        // Repite para otros campos según el formulario
     } catch (error) {
         console.error('Error al editar la propiedad:', error);
     }
@@ -100,21 +104,19 @@ const propertyForm = document.getElementById('propertyForm');
 if (propertyForm) {
     propertyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const id = document.getElementById('propertyId').value;
-        const titulo = document.getElementById('title').value;
-        const tipo = document.getElementById('type').value;
-        const precio = parseFloat(document.getElementById('price').value);
-        const ubicacion = document.getElementById('location').value;
-        const imagen = document.getElementById('image').value;
-        const descripcion = document.getElementById('description').value;
 
+        const id = document.getElementById('propertyId').value;
         const propiedad = {
-            Titulo: titulo,
-            Tipo: tipo,
-            Precio: isNaN(precio) ? 0 : precio,
-            Ubicacion: ubicacion,
-            Imagen: imagen,
-            Descripcion: descripcion,
+            Titulo: document.getElementById('title').value,
+            Tipo: document.getElementById('type').value,
+            Operacion: document.getElementById('operation').value,
+            PrecioVenta: parseFloat(document.getElementById('priceSale').value) || null,
+            PrecioRenta: parseFloat(document.getElementById('priceRent').value) || null,
+            Ciudad: document.getElementById('city').value,
+            Estado: document.getElementById('state').value,
+            Latitud: parseFloat(document.getElementById('latitude').value) || null,
+            Longitud: parseFloat(document.getElementById('longitude').value) || null,
+            // Agrega más campos según sea necesario
         };
 
         try {

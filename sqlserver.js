@@ -19,7 +19,9 @@ const config = {
 };
 
 // Middleware para habilitar CORS (antes de las rutas y middleware específicos)
-app.use(cors()); // Esto habilita CORS para todas las rutas
+app.use(cors({
+    origin: 'http://127.0.0.1:5500', // Cambia por la URL donde está tu frontend
+}));
 
 // Middleware para analizar JSON en solicitudes
 app.use(express.json());
@@ -35,6 +37,7 @@ async function connectToDB() {
 }
 
 // **Rutas para CRUD de propiedades**
+
 // Obtener todas las propiedades
 app.get('/api/propiedades', async (req, res) => {
     try {
@@ -68,19 +71,45 @@ app.get('/api/propiedades/:id', async (req, res) => {
 
 // Crear una nueva propiedad
 app.post('/api/propiedades', async (req, res) => {
-    const { Titulo, Tipo, Precio, Ubicacion, Imagen, Descripcion } = req.body;
+    const {
+        Titulo, Tipo, Operacion, PrecioVenta, PrecioRenta, AreaConstruida, AreaTotal,
+        Cuartos, Banos, Pisos, Direccion, Ciudad, Estado, Pais, CodigoPostal, Latitud, Longitud,
+        Imagen, Descripcion
+    } = req.body;
+
     try {
         const pool = await connectToDB();
         await pool.request()
             .input('Titulo', sql.VarChar, Titulo)
             .input('Tipo', sql.VarChar, Tipo)
-            .input('Precio', sql.Money, Precio)
-            .input('Ubicacion', sql.VarChar, Ubicacion)
+            .input('Operacion', sql.VarChar, Operacion)
+            .input('PrecioVenta', sql.Money, PrecioVenta)
+            .input('PrecioRenta', sql.Money, PrecioRenta)
+            .input('AreaConstruida', sql.Int, AreaConstruida)
+            .input('AreaTotal', sql.Int, AreaTotal)
+            .input('Cuartos', sql.Int, Cuartos)
+            .input('Banos', sql.Int, Banos)
+            .input('Pisos', sql.Int, Pisos)
+            .input('Direccion', sql.VarChar, Direccion)
+            .input('Ciudad', sql.VarChar, Ciudad)
+            .input('Estado', sql.VarChar, Estado)
+            .input('Pais', sql.VarChar, Pais)
+            .input('CodigoPostal', sql.VarChar, CodigoPostal)
+            .input('Latitud', sql.Float, Latitud)
+            .input('Longitud', sql.Float, Longitud)
             .input('Imagen', sql.VarChar, Imagen)
             .input('Descripcion', sql.Text, Descripcion)
             .query(`
-                INSERT INTO Propiedades (Titulo, Tipo, Precio, Ubicacion, Imagen, Descripcion)
-                VALUES (@Titulo, @Tipo, @Precio, @Ubicacion, @Imagen, @Descripcion)
+                INSERT INTO Propiedades (
+                    Titulo, Tipo, Operacion, PrecioVenta, PrecioRenta, AreaConstruida, AreaTotal,
+                    Cuartos, Banos, Pisos, Direccion, Ciudad, Estado, Pais, CodigoPostal, Latitud, Longitud,
+                    Imagen, Descripcion
+                )
+                VALUES (
+                    @Titulo, @Tipo, @Operacion, @PrecioVenta, @PrecioRenta, @AreaConstruida, @AreaTotal,
+                    @Cuartos, @Banos, @Pisos, @Direccion, @Ciudad, @Estado, @Pais, @CodigoPostal, @Latitud, @Longitud,
+                    @Imagen, @Descripcion
+                )
             `);
         res.status(201).json({ message: 'Propiedad creada exitosamente' });
     } catch (err) {
@@ -92,21 +121,44 @@ app.post('/api/propiedades', async (req, res) => {
 // Actualizar una propiedad existente
 app.put('/api/propiedades/:id', async (req, res) => {
     const { id } = req.params;
-    const { Titulo, Tipo, Precio, Ubicacion, Imagen, Descripcion } = req.body;
+    const {
+        Titulo, Tipo, Operacion, PrecioVenta, PrecioRenta, AreaConstruida, AreaTotal,
+        Cuartos, Banos, Pisos, Direccion, Ciudad, Estado, Pais, CodigoPostal, Latitud, Longitud,
+        Imagen, Descripcion
+    } = req.body;
+
     try {
         const pool = await connectToDB();
         await pool.request()
             .input('id', sql.Int, id)
             .input('Titulo', sql.VarChar, Titulo)
             .input('Tipo', sql.VarChar, Tipo)
-            .input('Precio', sql.Money, Precio)
-            .input('Ubicacion', sql.VarChar, Ubicacion)
+            .input('Operacion', sql.VarChar, Operacion)
+            .input('PrecioVenta', sql.Money, PrecioVenta)
+            .input('PrecioRenta', sql.Money, PrecioRenta)
+            .input('AreaConstruida', sql.Int, AreaConstruida)
+            .input('AreaTotal', sql.Int, AreaTotal)
+            .input('Cuartos', sql.Int, Cuartos)
+            .input('Banos', sql.Int, Banos)
+            .input('Pisos', sql.Int, Pisos)
+            .input('Direccion', sql.VarChar, Direccion)
+            .input('Ciudad', sql.VarChar, Ciudad)
+            .input('Estado', sql.VarChar, Estado)
+            .input('Pais', sql.VarChar, Pais)
+            .input('CodigoPostal', sql.VarChar, CodigoPostal)
+            .input('Latitud', sql.Float, Latitud)
+            .input('Longitud', sql.Float, Longitud)
             .input('Imagen', sql.VarChar, Imagen)
             .input('Descripcion', sql.Text, Descripcion)
             .query(`
                 UPDATE Propiedades
-                SET Titulo = @Titulo, Tipo = @Tipo, Precio = @Precio, 
-                    Ubicacion = @Ubicacion, Imagen = @Imagen, Descripcion = @Descripcion
+                SET Titulo = @Titulo, Tipo = @Tipo, Operacion = @Operacion, 
+                    PrecioVenta = @PrecioVenta, PrecioRenta = @PrecioRenta, 
+                    AreaConstruida = @AreaConstruida, AreaTotal = @AreaTotal, 
+                    Cuartos = @Cuartos, Banos = @Banos, Pisos = @Pisos, 
+                    Direccion = @Direccion, Ciudad = @Ciudad, Estado = @Estado, 
+                    Pais = @Pais, CodigoPostal = @CodigoPostal, Latitud = @Latitud, 
+                    Longitud = @Longitud, Imagen = @Imagen, Descripcion = @Descripcion
                 WHERE Id = @id
             `);
         res.json({ message: 'Propiedad actualizada exitosamente' });

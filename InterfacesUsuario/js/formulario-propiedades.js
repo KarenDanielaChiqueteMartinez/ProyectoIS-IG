@@ -1,4 +1,3 @@
-// Controla los campos de precio según la operación seleccionada
 function controlarPrecio() {
     const operacion = document.getElementById('operacion').value;
     const precioVenta = document.getElementById('precioVenta');
@@ -40,17 +39,15 @@ function cambiarValor(id, cambio) {
     input.value = valorActual;
 }
 
-// Función para generar los campos de carga de imágenes usando Dropzone
+// Genera los campos de carga de imágenes usando Dropzone
 function generarCamposImagenes() {
     const cuartos = parseInt(document.getElementById('Cuartos').value) || 0;
     const baños = parseInt(document.getElementById('Baños').value) || 0;
     const cocinas = parseInt(document.getElementById('Cocina').value) || 0;
-    
-    // Se limpia el contenedor de imágenes
+
     const contenedorImagenes = document.getElementById('imagenes-container');
     contenedorImagenes.innerHTML = '';
 
-    // Función para agregar los campos de carga para un área específica
     function agregarCampos(area, cantidad) {
         for (let i = 1; i <= cantidad; i++) {
             const areaDiv = document.createElement('div');
@@ -63,54 +60,45 @@ function generarCamposImagenes() {
             `;
             contenedorImagenes.appendChild(areaDiv);
 
-            // Inicializa Dropzone para este área
             new Dropzone(`#dropzone-${area}${i}`, {
-                url: '/upload',  // Aquí debes indicar el endpoint para subir las imágenes (puedes usar una API si es necesario)
-                maxFiles: 3,     // Limitamos la cantidad de archivos a 3 por área
-                acceptedFiles: 'image/*',  // Aceptamos solo imágenes
+                url: '/upload',
+                maxFiles: 3,
+                acceptedFiles: 'image/*',
                 dictDefaultMessage: 'Arrastra tus fotos aquí o haz clic para seleccionarlas',
                 dictFallbackMessage: 'Tu navegador no soporta la carga de archivos por arrastre',
                 dictInvalidFileType: 'Solo se permiten archivos de imagen',
-                dictFileTooBig: 'El archivo es demasiado grande. El tamaño máximo es 2 MB',
-                maxFilesize: 2,  // Tamaño máximo por archivo en MB
-                addRemoveLinks: true, // Permite eliminar archivos cargados
+                dictFileTooBig: 'El archivo es demasiado grande. Tamaño máximo: 2 MB',
+                maxFilesize: 2,
+                addRemoveLinks: true,
             });
         }
     }
 
-    // Agregar los campos de carga para cuartos, baños y cocinas según la cantidad seleccionada
     if (cuartos > 0) agregarCampos('Cuarto', cuartos);
     if (baños > 0) agregarCampos('Baño', baños);
     if (cocinas > 0) agregarCampos('Cocina', cocinas);
 }
 
-
 // Inicializa el mapa para seleccionar ubicación
 function inicializarMapa() {
-    // Coordenadas iniciales (puedes ajustarlas según la región)
     const coordenadasIniciales = [19.432608, -99.133209]; // Ciudad de México
     const zoomInicial = 13;
 
-    // Inicializar el mapa
     const map = L.map('map').setView(coordenadasIniciales, zoomInicial);
 
-    // Añadir capa base de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Crear marcador inicial
     const marker = L.marker(coordenadasIniciales, { draggable: true }).addTo(map);
 
-    // Actualizar coordenadas al mover el marcador
     marker.on('dragend', function () {
         const posicion = marker.getLatLng();
         document.getElementById('latitud').value = posicion.lat;
         document.getElementById('longitud').value = posicion.lng;
     });
 
-    // Evento para actualizar marcador al hacer clic en el mapa
     map.on('click', function (e) {
         const { lat, lng } = e.latlng;
         marker.setLatLng([lat, lng]);
@@ -118,7 +106,6 @@ function inicializarMapa() {
         document.getElementById('longitud').value = lng;
     });
 
-    // Inicializar campos de coordenadas
     document.getElementById('latitud').value = coordenadasIniciales[0];
     document.getElementById('longitud').value = coordenadasIniciales[1];
 }
@@ -126,4 +113,5 @@ function inicializarMapa() {
 // Llamar a la función para inicializar el mapa cuando la página cargue
 document.addEventListener('DOMContentLoaded', function () {
     inicializarMapa();
+    controlarPrecio(); // Para manejar el estado inicial de los campos de precio
 });
