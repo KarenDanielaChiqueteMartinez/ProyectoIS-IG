@@ -71,6 +71,7 @@ app.get('/api/propiedades/:id', async (req, res) => {
 
 // Crear una nueva propiedad
 app.post('/api/propiedades', async (req, res) => {
+    console.log('Datos recibidos:', req.body); // Esto te permitirá ver qué datos llegan
     const {
         Titulo, Tipo, Operacion, PrecioVenta, PrecioRenta, AreaConstruida, AreaTotal,
         Cuartos, Banos, Pisos, Direccion, Ciudad, Estado, Pais, CodigoPostal, Latitud, Longitud,
